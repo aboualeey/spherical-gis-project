@@ -1,0 +1,13 @@
+{
+  "services": [
+    {
+      "id": "1755250452353",
+      "title": "test",
+      "caption": "inverter",
+      "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.swiftermall.com%2Fafriipower-inverters%2F1065-afriipower-900va12v-pure-sine-wave-inverter.html&psig=AOvVaw3oEcDw7VJGkRdpeEpvC6SZ&ust=1755336791492000&source=images&cd=vfe&opi=89978449&ved=0CBgQjhxqFwoTCJijzq7BjI8DFQAAAAAdAAAAABAE",
+      "type": "image",
+      "order": 1,
+      "isActive": true
+    }
+  ]
+}

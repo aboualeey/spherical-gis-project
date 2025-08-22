@@ -1,0 +1,13 @@
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Add this line to fix the relation
+  mediaFiles MediaFile[]
+
+  @@map("users")
+}
