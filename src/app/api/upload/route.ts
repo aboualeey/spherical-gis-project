@@ -1,9 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile } from 'fs/promises'
 import path from 'path'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/utils/auth'
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    // Allow multiple roles to upload
+    const allowedRoles = ['MANAGING_DIRECTOR', 'ADMIN', 'INVENTORY_MANAGER'];
+    if (!allowedRoles.includes(session.user.role)) {
+      return NextResponse.json(
+        { error: 'Insufficient permissions' },
+        { status: 403 }
+      );
+    }
+
     const data = await request.formData()
     const file: File | null = data.get('file') as unknown as File
     
@@ -28,22 +48,4 @@ export async function POST(request: NextRequest) {
   } catch {
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
-}
-
-// Check authentication
-const session = await getServerSession(authOptions);
-if (!session) {
-  return NextResponse.json(
-    { error: 'Unauthorized' },
-    { status: 401 }
-  );
-}
-
-// Allow multiple roles to upload
-const allowedRoles = ['MANAGING_DIRECTOR', 'ADMIN', 'INVENTORY_MANAGER'];
-if (!allowedRoles.includes(session.user.role)) {
-  return NextResponse.json(
-    { error: 'Insufficient permissions' },
-    { status: 403 }
-  );
 }

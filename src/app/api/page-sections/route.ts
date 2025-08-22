@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     console.error('Error creating page section:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid data', details: error.errors },
+        { error: 'Invalid data', details: error.issues },
         { status: 400 }
       );
     }
@@ -98,7 +98,7 @@ export async function PUT(request: NextRequest) {
     console.error('Error updating page section:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid data', details: error.errors },
+        { error: 'Invalid data', details: error.issues },
         { status: 400 }
       );
     }

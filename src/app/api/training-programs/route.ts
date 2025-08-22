@@ -6,16 +6,11 @@ import { z } from 'zod';
 
 const trainingProgramSchema = z.object({
   title: z.string().min(1),
-  description: z.string().min(1),
-  duration: z.string().min(1),
-  level: z.enum(['beginner', 'intermediate', 'advanced']),
-  price: z.number().min(0),
-  currency: z.string().default('USD'),
-  features: z.string(), // JSON array
+  description: z.string().optional(),
+  duration: z.string().optional(),
+  price: z.number().min(0).optional(),
   imageUrl: z.string().optional(),
   isActive: z.boolean().default(true),
-  order: z.number().int().min(0).default(0),
-  maxStudents: z.number().int().min(1).optional(),
 });
 
 // GET /api/training-programs - Get training programs
@@ -28,7 +23,7 @@ export async function GET(request: NextRequest) {
     
     const trainingPrograms = await prisma.trainingProgram.findMany({
       where: whereClause,
-      orderBy: [{ order: 'asc' }, { createdAt: 'desc' }]
+      orderBy: [{ createdAt: 'desc' }]
     });
     
     return NextResponse.json(trainingPrograms);
@@ -61,7 +56,7 @@ export async function POST(request: NextRequest) {
     console.error('Error creating training program:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid data', details: error.errors },
+        { error: 'Invalid data', details: error.issues },
         { status: 400 }
       );
     }

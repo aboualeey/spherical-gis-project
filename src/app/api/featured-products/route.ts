@@ -22,18 +22,6 @@ export async function GET(request: NextRequest) {
     
     const featuredProducts = await prisma.featuredProduct.findMany({
       where: { page, isActive: true },
-      include: {
-        product: {
-          select: {
-            id: true,
-            name: true,
-            description: true,
-            price: true,
-            imageUrl: true,
-            category: true
-          }
-        }
-      },
       orderBy: [{ order: 'asc' }, { createdAt: 'desc' }]
     });
     
@@ -59,10 +47,7 @@ export async function POST(request: NextRequest) {
     const validatedData = featuredProductSchema.parse(body);
 
     const featuredProduct = await prisma.featuredProduct.create({
-      data: validatedData,
-      include: {
-        product: true
-      }
+      data: validatedData
     });
 
     return NextResponse.json(featuredProduct, { status: 201 });
@@ -70,7 +55,7 @@ export async function POST(request: NextRequest) {
     console.error('Error creating featured product:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid data', details: error.errors },
+        { error: 'Invalid data', details: error.issues },
         { status: 400 }
       );
     }
@@ -100,10 +85,7 @@ export async function PUT(request: NextRequest) {
 
     const featuredProduct = await prisma.featuredProduct.update({
       where: { id },
-      data: validatedData,
-      include: {
-        product: true
-      }
+      data: validatedData
     });
 
     return NextResponse.json(featuredProduct);
