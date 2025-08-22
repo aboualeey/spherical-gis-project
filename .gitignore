@@ -38,3 +38,5 @@ desktop.ini
 # Uploads (optional - you might want to keep some sample images)
 /public/uploads/*
 !/public/uploads/.gitkeep
+# Local Netlify folder
+.netlify
