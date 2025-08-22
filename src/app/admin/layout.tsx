@@ -1,15 +1,12 @@
-// admin/services/layout.tsx
-import React from "react";
+'use client'
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+import React from 'react'
+import AdminLayout from '@/components/layout/AdminLayout'
+
+export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <div className="admin-container">
-          <header>Admin Dashboard</header>
-          <main>{children}</main>
-        </div>
-      </body>
-    </html>
-  );
+    <AdminLayout>
+      {children}
+    </AdminLayout>
+  )
 }
