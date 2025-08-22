@@ -1,6 +1,16 @@
 [build]
-  command = "npm run build"
+  command = "npx prisma generate && npm run build"
   publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--production=false"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[context.production.environment]
+  NEXTAUTH_URL = "https://spherical-gis.netlify.app"
+
+[context.deploy-preview.environment]
+  NEXTAUTH_URL = "https://deploy-preview-$REVIEW_ID--spherical-gis.netlify.app"
