@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { FaPlus, FaEdit, FaTrash, FaSave, FaImage, FaList, FaVideo, FaUpload, FaEye } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
@@ -408,10 +409,11 @@ export default function UnifiedContentManagement() {
                               onMouseLeave={(e) => e.currentTarget.pause()}
                             />
                           ) : (
-                            <img
+                            <Image
                               src={item.src}
                               alt={item.alt}
                               className="w-full h-full object-cover"
+                              fill
                             />
                           )}
                           <div className="absolute top-2 right-2">
@@ -490,10 +492,12 @@ export default function UnifiedContentManagement() {
                             <p className="text-gray-700 mb-4">{item.content}</p>
                             {item.imageUrl && (
                               <div className="mb-4">
-                                <img
+                                <Image
                                   src={item.imageUrl}
                                   alt={item.title}
                                   className="w-32 h-20 object-cover rounded"
+                                  width={128}
+                                  height={80}
                                 />
                               </div>
                             )}
@@ -759,10 +763,12 @@ export default function UnifiedContentManagement() {
                         muted
                       />
                     ) : (
-                      <img
+                      <Image
                         src={media.url}
                         alt={media.alt}
                         className="w-full h-24 object-cover"
+                        width={200}
+                        height={96}
                       />
                     )}
                     <div className="p-2">

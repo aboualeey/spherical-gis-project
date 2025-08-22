@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 
 export interface ValidationRule {
@@ -52,7 +52,7 @@ export interface UseFormValidationReturn<T> {
   setTouched: (field: keyof T, touched?: boolean) => void;
 }
 
-export function useFormValidation<T extends Record<string, any>>(
+export function useFormValidation<T extends Record<string, unknown>>(
   initialValues: T,
   config: FormConfig = {}
 ): UseFormValidationReturn<T> {

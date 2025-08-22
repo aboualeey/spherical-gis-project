@@ -23,7 +23,7 @@ export const getFileSize = (filePath: string): number => {
   try {
     const stats = fs.statSync(filePath);
     return stats.size;
-  } catch (error) {
+  } catch {
     return 0;
   }
 };

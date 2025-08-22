@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { FaPlus, FaSearch, FaFileInvoice, FaTrash } from 'react-icons/fa';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { formatNaira } from '@/lib/utils/currency';
@@ -281,7 +282,7 @@ export default function SalesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="border border-gray-200 rounded-md p-4 flex items-center">
-                  <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover rounded-md" />
+                  <Image src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover rounded-md" width={64} height={64} />
                   <div className="ml-4 flex-grow">
                     <h3 className="font-medium">{product.name}</h3>
                     <div className="flex justify-between items-center mt-2">
@@ -339,7 +340,7 @@ export default function SalesPage() {
                   {cart.map((item) => (
                     <div key={item.id} className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <img src={item.imageUrl} alt={item.name} className="w-10 h-10 object-cover rounded-md" />
+                        <Image src={item.imageUrl} alt={item.name} className="w-10 h-10 object-cover rounded-md" width={40} height={40} />
                         <div className="ml-3">
                           <h4 className="text-sm font-medium">{item.name}</h4>
                           <span className="text-sm text-gray-500">{formatNaira(item.price)}</span>

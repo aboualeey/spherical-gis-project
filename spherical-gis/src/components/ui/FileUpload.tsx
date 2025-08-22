@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useRef, DragEvent, ChangeEvent } from 'react';
-import { Upload, X, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
+import { Upload, Image as ImageIcon } from 'lucide-react';
 
 interface FileUploadProps {
   onUpload: (url: string) => void;
@@ -104,10 +105,12 @@ export default function FileUpload({ onUpload, currentImage, className = '' }: F
     <div className={`relative ${className}`}>
       {previewUrl ? (
         <div className="relative group">
-          <img
+          <Image
             src={previewUrl}
             alt="Preview"
             className="w-full h-48 object-cover rounded-lg border-2 border-gray-200"
+            width={400}
+            height={192}
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
             <button

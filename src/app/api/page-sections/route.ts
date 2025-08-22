@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     const page = searchParams.get('page');
     const section = searchParams.get('section');
     
-    const whereClause: any = {};
+    const whereClause: { page?: string; section?: string } = {};
     if (page) whereClause.page = page;
     if (section) whereClause.section = section;
     

@@ -73,11 +73,11 @@ export const useAuthGuard = (options: UseAuthGuardOptions = {}) => {
 };
 
 // Higher-order component for protecting pages
-export const withAuthGuard = <P extends object>(
+export const withAuthGuard = function <P extends object>(
   Component: React.ComponentType<P>,
   options: UseAuthGuardOptions = {}
-) => {
-  return function AuthGuardedComponent(props: P) {
+) {
+  const AuthGuardedComponent = (props: P) => {
     const { isLoading, isAuthorized } = useAuthGuard(options);
 
     if (isLoading) {
@@ -94,6 +94,10 @@ export const withAuthGuard = <P extends object>(
 
     return <Component {...props} />;
   };
+
+  AuthGuardedComponent.displayName = `withAuthGuard(${Component.displayName || Component.name})`;
+  
+  return AuthGuardedComponent;
 };
 
 // Hook for checking specific permissions

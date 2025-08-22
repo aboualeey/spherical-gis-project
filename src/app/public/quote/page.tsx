@@ -1,8 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -11,21 +10,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+
+
+
 export default function Quote() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
-  const [date, setDate] = useState<Date>();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -68,7 +60,7 @@ export default function Quote() {
         }
         toast.success("Quote submitted successfully");
         router.push("/");
-      } catch (error) {
+      } catch {
         toast.error("Something went wrong");
       }
       setLoading(false);
@@ -241,24 +233,11 @@ export default function Quote() {
               <div className="text-red-500 text-sm mt-2">{formik.errors.terms}</div>
             ) : null}
             <Button type="submit" className="mt-6" disabled={loading}>
-              <Carousel
-                items={[
-                  { src: '/Geo-spatial1.jpeg', alt: 'Spherical GIS Solutions', caption: 'Innovative Geospatial Technology', type: 'image' },
-                  { src: '/Geo-spatial2.jpg', alt: 'GIS & Remote Sensing', caption: 'Advanced Spatial Analysis', type: 'image' },
-                  { src: '/carousel-3.svg', alt: 'Solar Energy Solutions', caption: 'Sustainable Power for the Future', type: 'image' }
-                ]}
-                className="h-[500px]"
-              />
-              <div className="absolute inset-0 flex items-center justify-center z-10 bg-black bg-opacity-40">
-                <div className="text-center text-white px-4">
-                  <h1 className="text-4xl md:text-5xl font-bold mb-4">Request a Quote</h1>
-                  <p className="text-xl max-w-3xl mx-auto">
-                    Fill out the form below and our team will get back to you with a customized quote
-                  </p>
-                </div>
-              </div>
-            </div>
-            {formik.touched.terms && formik.errors.terms ? (
-              <div className="text-red-500 text-sm mt-2">{formik.errors.terms}</div>
-            ) : null}
-            <Button type="submit" className="mt-6" disabled={loading}>
+              {loading ? "Submitting..." : "Submit Quote Request"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

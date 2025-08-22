@@ -95,7 +95,7 @@ export function useErrorHandler(): UseErrorHandlerReturn {
 }
 
 // Hook for API calls with built-in error handling
-export function useApiCall<T = any>() {
+export function useApiCall<T = unknown>() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<T | null>(null);
   const { handleError, clearError, isError, errorMessage } = useErrorHandler();

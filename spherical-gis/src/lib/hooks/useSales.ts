@@ -55,8 +55,9 @@ export function useSales() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching sales');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching sales';
+      setError(errorMessage);
       setIsLoading(false);
       return [];
     }
@@ -78,8 +79,9 @@ export function useSales() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching the sale');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching the sale';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -108,8 +110,9 @@ export function useSales() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while creating the sale');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while creating the sale';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -163,8 +166,9 @@ export function useSales() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching sales by date range');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching sales by date range';
+      setError(errorMessage);
       setIsLoading(false);
       return [];
     }
@@ -191,8 +195,9 @@ export function useSales() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching sales summary');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching sales summary';
+      setError(errorMessage);
       setIsLoading(false);
       return {
         totalSales: 0,

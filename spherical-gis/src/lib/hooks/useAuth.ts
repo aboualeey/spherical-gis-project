@@ -2,7 +2,6 @@
 
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { PERMISSIONS } from '@/lib/utils/auth';
 
 interface AuthUser {
   id?: string;
@@ -46,7 +45,7 @@ export function useAuth(): UseAuthReturn {
       }
 
       return { success: true };
-    } catch (error) {
+    } catch {
       return { success: false, error: 'An unexpected error occurred' };
     }
   };

@@ -25,16 +25,8 @@ interface ProductsContextType {
 
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
-interface ProductsProviderProps {
-  children: ReactNode;
-}
-
-export function ProductsProvider({ children }: ProductsProviderProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Initial product data
-  const initialProducts: Product[] = [
+// Initial product data - moved outside component to prevent re-creation
+const initialProducts: Product[] = [
     {
       id: 1,
       name: "Monocrystalline Solar Panels",
@@ -156,6 +148,14 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
       inStock: true
     }
   ];
+
+interface ProductsProviderProps {
+  children: ReactNode;
+}
+
+export function ProductsProvider({ children }: ProductsProviderProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Initialize products from localStorage or use default data
@@ -281,7 +281,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
       if (savedProducts) {
         setProducts(JSON.parse(savedProducts));
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to refresh products');
     } finally {
       setIsLoading(false);

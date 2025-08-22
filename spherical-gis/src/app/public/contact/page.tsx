@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import MainLayout from '@/components/layout/MainLayout';
 import ContactForm from '@/components/forms/ContactForm';
@@ -21,10 +22,12 @@ export default function ContactPage() {
       <div className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/contact-spherical-gis.jpg"
             alt="Contact Spherical GIS"
             className="w-full h-full object-cover"
+            fill
+            priority
           />
 
         </div>

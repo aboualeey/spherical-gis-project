@@ -34,7 +34,7 @@ export default function Contact() {
       setName('')
       setEmail('')
       setMessage('')
-    } catch (error) {
+    } catch {
       toast.error('Failed to send message. Please try again.')
     } finally {
       setLoading(false)
@@ -59,7 +59,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-2 text-lg leading-8 text-muted-foreground"
           >
-            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
           </motion.p>
         </div>
         <motion.div

@@ -46,8 +46,9 @@ export function useInventory() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching inventory items');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching inventory items';
+      setError(errorMessage);
       setIsLoading(false);
       return [];
     }
@@ -69,8 +70,9 @@ export function useInventory() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching the inventory item');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching the inventory item';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -99,8 +101,9 @@ export function useInventory() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while creating the inventory item');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while creating the inventory item';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -129,8 +132,9 @@ export function useInventory() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while updating the inventory item');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while updating the inventory item';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -154,8 +158,9 @@ export function useInventory() {
       setIsLoading(false);
       router.refresh();
       return true;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while deleting the inventory item');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while deleting the inventory item';
+      setError(errorMessage);
       setIsLoading(false);
       return false;
     }
@@ -177,8 +182,9 @@ export function useInventory() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching low stock items');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching low stock items';
+      setError(errorMessage);
       setIsLoading(false);
       return [];
     }

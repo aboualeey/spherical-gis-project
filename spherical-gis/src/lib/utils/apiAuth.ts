@@ -8,9 +8,23 @@ interface AuthOptions {
   allowUnauthenticated?: boolean;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  isActive: boolean;
+  lastLogin?: Date;
+}
+
+interface ApiContext {
+  params?: Record<string, string | string[]>;
+  [key: string]: unknown;
+}
+
 interface AuthResult {
   success: boolean;
-  user?: any;
+  user?: User;
   error?: string;
   response?: NextResponse;
 }
@@ -105,12 +119,12 @@ export async function withAuth(
  * Higher-order function to wrap API route handlers with authentication
  */
 export function withApiAuth(
-  handler: (request: NextRequest, context: any, user?: any) => Promise<NextResponse>,
+  handler: (request: NextRequest, context: ApiContext, user?: User) => Promise<NextResponse>,
   options: AuthOptions = {}
 ) {
   return async function authHandler(
     request: NextRequest,
-    context: any
+    context: ApiContext
   ): Promise<NextResponse> {
     const authResult = await withAuth(request, options);
 

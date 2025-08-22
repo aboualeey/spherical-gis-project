@@ -2,6 +2,40 @@
 
 import { useState, useEffect } from 'react';
 
+// Database carousel item structure
+interface DatabaseCarouselItem {
+  id: string;
+  title: string;
+  caption?: string;
+  page: string;
+  order: number;
+  isActive: boolean;
+  mediaId?: string;
+  media?: {
+    id: string;
+    filename: string;
+    originalName: string;
+    mimeType: string;
+    size: number;
+    url: string;
+  };
+  externalUrl?: string;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Fallback JSON structure
+interface FallbackCarouselItem {
+  title: string;
+  caption?: string;
+  imageUrl: string;
+  type: string;
+  isActive: boolean;
+  order: number;
+}
+
+// Final processed carousel item
 interface CarouselItem {
   src: string;
   alt: string;
@@ -11,22 +45,21 @@ interface CarouselItem {
 
 export function useCarousel(page: string): CarouselItem[] {
   const [items, setItems] = useState<CarouselItem[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCarouselData = async () => {
       try {
-        setLoading(true);
+
         
         // First try to fetch from database API
         const response = await fetch(`/api/carousel?page=${page}`);
         if (response.ok) {
           const data = await response.json();
-          const carouselItems = data.map((item: any) => ({
-            src: item.src,
-            alt: item.alt,
+          const carouselItems = data.map((item: DatabaseCarouselItem) => ({
+            src: item.media?.url || item.externalUrl || '',
+            alt: item.title,
             caption: item.caption,
-            type: item.type
+            type: item.type as 'image' | 'video'
           }));
           
           if (carouselItems.length > 0) {
@@ -42,9 +75,9 @@ export function useCarousel(page: string): CarouselItem[] {
           const pageItems = fallbackData[page] || [];
           
           const carouselItems = pageItems
-            .filter((item: any) => item.isActive)
-            .sort((a: any, b: any) => a.order - b.order)
-            .map((item: any) => ({
+            .filter((item: FallbackCarouselItem) => item.isActive)
+            .sort((a: FallbackCarouselItem, b: FallbackCarouselItem) => a.order - b.order)
+            .map((item: FallbackCarouselItem) => ({
               src: item.imageUrl,
               alt: item.title,
               caption: item.caption,
@@ -68,8 +101,6 @@ export function useCarousel(page: string): CarouselItem[] {
           { src: '/Geo-spatial2.jpg', alt: 'GIS & Remote Sensing', caption: 'Advanced Spatial Analysis', type: 'image' },
           { src: '/carousel-3.svg', alt: 'Solar Energy Solutions', caption: 'Sustainable Power for the Future', type: 'image' }
         ]);
-      } finally {
-        setLoading(false);
       }
     };
 
