@@ -58,7 +58,7 @@ export async function POST(request: Request) {
         name,
         email,
         password: hashedPassword,
-        role: role.toUpperCase() as any,
+        role: role.toUpperCase() as keyof typeof import('@/lib/utils/auth').ROLES,
         isActive: true
       },
       select: {

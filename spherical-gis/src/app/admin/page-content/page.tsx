@@ -96,7 +96,7 @@ export default function PageContentManagement() {
   const [showSectionModal, setShowSectionModal] = useState(false);
   const [showFeaturedModal, setShowFeaturedModal] = useState(false);
   const [showTrainingModal, setShowTrainingModal] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<PageSection | FeaturedProduct | TrainingProgram | null>(null);
 
   // Form validation for section form
   const sectionFormValidation = useFormValidation(

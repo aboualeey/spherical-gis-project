@@ -8,7 +8,7 @@ export interface ValidationRule {
   minLength?: number;
   maxLength?: number;
   pattern?: RegExp;
-  custom?: (value: any) => string | null;
+  custom?: (value: unknown) => string | null;
   email?: boolean;
   url?: boolean;
   number?: boolean;
@@ -40,7 +40,7 @@ export interface UseFormValidationReturn<T> {
   touched: FormTouched;
   isValid: boolean;
   isSubmitting: boolean;
-  setValue: (field: keyof T, value: any) => void;
+  setValue: (field: keyof T, value: T[keyof T]) => void;
   setValues: (values: Partial<T>) => void;
   setError: (field: keyof T, error: string) => void;
   clearError: (field: keyof T) => void;
@@ -61,7 +61,7 @@ export function useFormValidation<T extends Record<string, any>>(
   const [touched, setTouchedState] = useState<FormTouched>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const validateValue = useCallback((field: keyof T, value: any, allValues: T): string | null => {
+  const validateValue = useCallback((field: keyof T, value: T[keyof T], allValues: T): string | null => {
     const fieldConfig = config[field as string];
     if (!fieldConfig?.rules) return null;
 
@@ -150,7 +150,7 @@ export function useFormValidation<T extends Record<string, any>>(
     return isFormValid;
   }, [values, validateValue]);
 
-  const setValue = useCallback((field: keyof T, value: any) => {
+  const setValue = useCallback((field: keyof T, value: T[keyof T]) => {
     setValuesState(prev => ({ ...prev, [field]: value }));
     
     // Auto-validate on change if field was touched

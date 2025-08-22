@@ -34,8 +34,9 @@ export function useUsers() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching users');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching users';
+      setError(errorMessage);
       setIsLoading(false);
       return [];
     }
@@ -57,8 +58,9 @@ export function useUsers() {
       const data = await response.json();
       setIsLoading(false);
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching the user');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching the user';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -87,8 +89,9 @@ export function useUsers() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while creating the user');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while creating the user';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -117,8 +120,9 @@ export function useUsers() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while updating the user');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while updating the user';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }
@@ -142,8 +146,9 @@ export function useUsers() {
       setIsLoading(false);
       router.refresh();
       return true;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while deleting the user');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while deleting the user';
+      setError(errorMessage);
       setIsLoading(false);
       return false;
     }
@@ -172,8 +177,9 @@ export function useUsers() {
       setIsLoading(false);
       router.refresh();
       return data;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while toggling user status');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while toggling user status';
+      setError(errorMessage);
       setIsLoading(false);
       return null;
     }

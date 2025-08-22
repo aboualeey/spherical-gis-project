@@ -9,13 +9,7 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
-  // API configuration
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-    responseLimit: '10mb',
-  },
+
   
   // Security headers
   async headers() {
@@ -40,10 +34,8 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Experimental features
-  experimental: {
-    serverComponentsExternalPackages: ['@prisma/client'],
-  },
+  // Server external packages
+  serverExternalPackages: ['@prisma/client'],
   
   // Webpack configuration
   webpack: (config, { isServer }) => {

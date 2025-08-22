@@ -126,13 +126,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   // Filter menu items based on user role
   const menuItems = allMenuItems.filter(item => {
     if (item.href) {
-      return item.roles?.includes(userRole as any);
+      return item.roles?.includes(userRole as keyof typeof ROLES);
     } else {
       // For grouped items, check if user has access to any sub-item
       const hasAccessToSubItems = item.items?.some(subItem => 
-        subItem.roles?.includes(userRole as any)
+        subItem.roles?.includes(userRole as keyof typeof ROLES)
       );
-      return hasAccessToSubItems && item.roles?.includes(userRole as any);
+      return hasAccessToSubItems && item.roles?.includes(userRole as keyof typeof ROLES);
     }
   }).map(item => {
     if (item.items) {
@@ -140,7 +140,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       return {
         ...item,
         items: item.items.filter(subItem => 
-          subItem.roles?.includes(userRole as any)
+          subItem.roles?.includes(userRole as keyof typeof ROLES)
         )
       };
     }

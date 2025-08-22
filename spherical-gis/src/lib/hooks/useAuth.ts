@@ -4,8 +4,16 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { PERMISSIONS } from '@/lib/utils/auth';
 
+interface AuthUser {
+  id?: string;
+  name?: string | null;
+  email?: string | null;
+  role?: string;
+  image?: string | null;
+}
+
 interface UseAuthReturn {
-  user: any;
+  user: AuthUser | null;
   isLoading: boolean;
   isAuthenticated: boolean;
   hasPermission: (permission: string[]) => boolean;

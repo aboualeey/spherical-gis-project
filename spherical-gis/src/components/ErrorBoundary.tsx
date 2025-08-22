@@ -236,7 +236,7 @@ export const ComponentErrorBoundary: React.FC<Omit<Props, 'level'>> = (props) =>
 
 // Hook for functional components to handle errors
 export const useErrorHandler = () => {
-  const handleError = (error: Error, errorInfo?: any) => {
+  const handleError = (error: Error, errorInfo?: React.ErrorInfo) => {
     console.error('Error caught by useErrorHandler:', error, errorInfo);
     
     // Log to external service in production
@@ -250,7 +250,7 @@ export const useErrorHandler = () => {
 };
 
 // Async error handler for promises
-export const handleAsyncError = (error: any) => {
+export const handleAsyncError = (error: Error | unknown) => {
   console.error('Async error:', error);
   
   // Log to external service in production

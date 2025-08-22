@@ -83,7 +83,13 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     }
     
     // Prepare update data
-    const updateData: any = {};
+    const updateData: {
+      name?: string;
+      email?: string;
+      role?: string;
+      isActive?: boolean;
+      password?: string;
+    } = {};
     
     if (body.name !== undefined) updateData.name = body.name;
     if (body.email !== undefined) updateData.email = body.email;
