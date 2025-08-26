@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#3B82F6" />
-  <text x="400" y="300" font-family="Arial" font-size="48" fill="white" text-anchor="middle" dominant-baseline="middle">Inverters</text>
-  <rect x="250" y="350" width="300" height="100" fill="#1E40AF" />
-</svg>
