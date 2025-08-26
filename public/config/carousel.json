@@ -1,13 +1,32 @@
 {
-  "services": [
+  "home": [
     {
-      "id": "1755250452353",
-      "title": "test",
-      "caption": "inverter",
-      "imageUrl": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.swiftermall.com%2Fafriipower-inverters%2F1065-afriipower-900va12v-pure-sine-wave-inverter.html&psig=AOvVaw3oEcDw7VJGkRdpeEpvC6SZ&ust=1755336791492000&source=images&cd=vfe&opi=89978449&ved=0CBgQjhxqFwoTCJijzq7BjI8DFQAAAAAdAAAAABAE",
+      "id": "gis-hero-1",
+      "title": "GIS & Remote Sensing Solutions",
+      "caption": "Professional geographic information systems and remote sensing services for spatial data analysis",
+      "imageUrl": "/Geo-spatial1.jpeg",
       "type": "image",
       "order": 1,
       "isActive": true
+    },
+    {
+      "id": "gis-hero-2",
+      "title": "Solar Energy Solutions",
+      "caption": "Sustainable solar panel installation for residential and commercial properties",
+      "imageUrl": "/solar-panel-1.jpg",
+      "type": "image",
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "gis-hero-3",
+      "title": "Spatial Data Analysis",
+      "caption": "Advanced GIS technology for location intelligence and spatial decision making",
+      "imageUrl": "/Geo-spatial2.jpg",
+      "type": "image",
+      "order": 3,
+      "isActive": true
     }
-  ]
+  ],
+  "services": []
 }
