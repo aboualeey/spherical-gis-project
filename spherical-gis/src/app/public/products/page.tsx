@@ -270,11 +270,17 @@ export default function ProductsPage() {
                 <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                   <div className="relative h-64 w-full">
                     <Image 
-                      src={product.imageUrl} 
+                      src={product.imageUrl || '/placeholder-product1.jpg'} 
                       alt={product.name} 
                       fill
                       className="object-cover"
                       unoptimized
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src !== '/placeholder-product1.jpg') {
+                          target.src = '/placeholder-product1.jpg';
+                        }
+                      }}
                     />
                     {!product.inStock && (
                       <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">

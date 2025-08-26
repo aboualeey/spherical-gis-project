@@ -85,7 +85,7 @@ export default function Carousel({
             {item.type === 'image' ? (
               <div className="relative w-full h-full">
                 <Image
-                  src={item.src}
+                  src={item.src || '/placeholder-hero.jpg'}
                   alt={item.alt}
                   fill
                   className="object-cover w-full h-full"
@@ -95,6 +95,11 @@ export default function Carousel({
                   onError={(e) => {
                     console.error('Image loading error:', e);
                     console.error('Image src:', item.src);
+                    // Set fallback image
+                    const target = e.target as HTMLImageElement;
+                    if (target.src !== '/placeholder-hero.jpg') {
+                      target.src = '/placeholder-hero.jpg';
+                    }
                   }}
                   onLoad={() => {
                     console.log('Image loaded successfully:', item.src);

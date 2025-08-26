@@ -56,7 +56,7 @@ export function useCarousel(page: string): CarouselItem[] {
         if (response.ok) {
           const data = await response.json();
           const carouselItems = data.map((item: DatabaseCarouselItem) => ({
-            src: item.media?.url || item.externalUrl || '',
+            src: item.media?.url || item.externalUrl || '/placeholder-hero.jpg',
             alt: item.title,
             caption: item.caption,
             type: item.type as 'image' | 'video'

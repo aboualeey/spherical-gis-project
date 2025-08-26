@@ -46,7 +46,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSuccess, isAdmin = false, cal
     password: {
       rules: {
         required: true,
-        minLength: 8
+        minLength: 6
       },
       label: 'Password'
     },

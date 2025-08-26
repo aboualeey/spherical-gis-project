@@ -200,11 +200,17 @@ export default function ProductFeaturesManagement() {
             <div key={feature.id} className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="relative h-48 w-full">
                 <Image 
-                  src={feature.imageUrl} 
+                  src={feature.imageUrl || '/placeholder-product1.jpg'} 
                   alt={feature.title} 
                   fill
                   className="object-cover"
                   unoptimized
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src !== '/placeholder-product1.jpg') {
+                      target.src = '/placeholder-product1.jpg';
+                    }
+                  }}
                 />
                 <div className="absolute top-2 right-2">
                   <span className={`px-2 py-1 rounded-full text-xs ${

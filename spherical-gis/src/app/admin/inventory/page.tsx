@@ -178,7 +178,19 @@ export default function InventoryPage() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <Image className="h-10 w-10 rounded-md object-cover" src={product.imageUrl} alt={product.name} width={40} height={40} />
+                        <Image 
+                          className="h-10 w-10 rounded-md object-cover" 
+                          src={product.imageUrl || '/placeholder-product1.jpg'} 
+                          alt={product.name} 
+                          width={40} 
+                          height={40}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (target.src !== '/placeholder-product1.jpg') {
+                              target.src = '/placeholder-product1.jpg';
+                            }
+                          }}
+                        />
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">{product.name}</div>
